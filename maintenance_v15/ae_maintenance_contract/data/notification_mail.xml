@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="notification_mail_template" model="mail.template">
+        <field name="name">Notification Email Template</field>
+        <field name="model_id" ref="model_maintenance_contract"/>
+        <field name="email_from">{{object.company_id.email}}</field>
+<!--        <field name="email_to">{{object.partner_id.email}}</field>-->
+
+        <field name="subject">Maintenance Announcement Notice</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0 auto; width: 50%;">
+                <table style="border-collapse: collapse; width: 100%; border: 1px solid black;">
+                    <tr>I hope this letter finds you well. We would like to inform you that there will be scheduled
+                        maintenance work
+                        on<t t-out="object.date_from or ''"/>.
+                    </tr>
+                    <br/>
+
+                    <tr>
+                        The maintenance work will include
+
+
+                        <t t-set="maintenance_names" t-value="object.maintenance_type_ids.mapped('name')"/>
+                        <t t-out="', '.join(maintenance_names)"/>.
+
+
+                        Our maintenance team will be on-site during this period to ensure that the work is completed
+                        efficiently and with minimal disruption to your daily routine.
+                    </tr>
+                    <br/>
+                    <tr>
+                        We kindly ask for your cooperation and understanding during this time. Your safety and comfort are our top priorities,
+                        and we appreciate your patience as we work to improve the property for all tenants.
+                    </tr>
+                    <br/>
+                    <tr>
+                        Thank you for your attention to this matter.
+
+                    </tr>
+                    <br/>
+                    <tr>
+                        Sincerely,
+                    </tr>
+                </table>
+
+            </div>
+
+        </field>
+    </record>
+</odoo>

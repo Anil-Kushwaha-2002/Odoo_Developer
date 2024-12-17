@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Ajman contract : Editing   -->
+        <template id="move_in_report" name="move_in_report" track="1">
+            <t t-call="website.layout">
+                <t t-call="web.html_container">
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500&amp;display=swap');
+                        font-family: 'Tajawal', sans-serif;
+                    </style>
+
+                        <div style="text-align:center;width:1358px;position:relative;margin: auto;">
+                            <img src="/oe_maintenance_move_in/static/src/img/move_in_form.png"
+                                 style="width:100%"/>
+
+
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

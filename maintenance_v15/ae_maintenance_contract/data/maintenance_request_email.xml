@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record id="maintenance_email_notification_template_oe" model="mail.template">
+        <field name="name">Maintenance Request Send Email</field>
+        <field name="model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="subject">Maintenance Request Send Email</field>
+        <field name="email_from">{{ object.company_id.email }}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                   style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate;">
+                <tr>
+                    <td valign="top">
+                        <div style="font-size: 13px; margin: 0px; padding: 0px;">
+                            <br/>
+                            A new maintenance request has been created:
+                            <b>
+                                <t t-out="object.name or ''"/>
+                            </b>
+                            <br/>
+                            <br/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </field>
+    </record>
+    <record id="maintenance_email_notification_under_mt_template_oe" model="mail.template">
+        <field name="name">Maintenance Request Under the MT</field>
+        <field name="model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="subject">Maintenance Request Under the MT</field>
+        <field name="email_from">{{ object.company_id.email }}</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                   style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse: separate;">
+                <tr>
+                    <td valign="top">
+                        <div style="font-size: 13px; margin: 0px; padding: 0px;">
+                            <br/>
+                            A Maintenance Request Under the MT:
+                            <b>
+                                <t t-out="object.name or ''"/>
+                            </b>
+                            <br/>
+                            <br/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </field>
+    </record>
+    <record id="maintenance_request_email_notification__oe" model="mail.template">
+        <field name="name">Maintenance Request Email Notification</field>
+        <field name="model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="email_from">{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
+        <field name="email_to">{{ (object.employee_id.work_email) }}</field>
+        <field name="subject">Maintenance Request (of {{ object.name or 'n/a' }})</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0 auto; width: 50%;">
+                <table style="border-collapse: collapse; width: 100%; border: 1px solid black;">
+                    <tr>
+                        <td style="padding: 5px; font-size: 13px; text-align: center; " colspan="2">Maintenance Request
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px;">Request Type</td>
+                        <td style="padding: 5px; text-align: left;">
+                            :
+                            <t t-out="object.maintenance_request_type_id.name or ''"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px;">Flat</td>
+                        <td style="padding: 5px; text-align: left;">
+                            :
+                            <t t-out="object.flat_id.name or ''"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px;">Request Date</td>
+                        <td style="padding: 5px; text-align: left;">
+                            :
+                            <t t-out="object.request_date or ''"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px;">Maintenance Type</td>
+                        <td style="padding: 5px; text-align: left;">
+                            :
+                            <t t-out="object.maintenance_type.title()  or ''"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px;">Tenant Information</td>
+                        <td style="padding: 5px; text-align: left;">
+                        <div>
+                            <div>
+                                Tenant Name :
+                                <t t-out="object.tenant_name or ''"/>
+                            </div>
+                            <div>
+                                Tenant Phone :
+                                <t t-out="object.tenant_phone or ''"/>
+                            </div>
+                            <div>
+                                Tenant Mobile :
+                                <t t-out="object.tenant_mobile or ''"/>
+                            </div>
+                            <div>
+                                Tenant Email :
+                                <t t-out="object.tenant_email or ''"/>
+                            </div>
+
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </field>
+    <field name="auto_delete" eval="True"/>
+</record>
+        </odoo>

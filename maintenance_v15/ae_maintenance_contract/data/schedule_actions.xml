@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <record id="maintenance_contract_running_schedule" model="ir.cron">
+            <field name="name">Maintenance Contract Running Schedule</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_maintenance_contract"/>
+            <field name="code">model.action_check_contract_running()</field>
+            <field name="state">code</field>
+        </record>
+
+    </data>
+</odoo>

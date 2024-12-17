@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_task_move_in_inherit" model="ir.ui.view">
+        <field name="name">project.task.move.in.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_parent_task']" position="before">
+                <button string="Move In" type="object"
+                        name="action_move_in_report"
+                        icon="fa-file"  attrs="{'invisible': [('is_maintenance_type', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='project_id']" position="after">
+              <field name="is_maintenance_type" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
