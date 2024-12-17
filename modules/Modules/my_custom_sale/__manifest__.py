@@ -7,7 +7,7 @@
         of the quantities in the delivery order and creates a backorder for the remaining 
         quantities upon confirmation of the sale order.
     """,
-    'author': 'Aleeza Anjum',
+    'author': 'Anil Kushwaha',
     'depends': ['sale', 'stock', 'base'],
     'data': [
         'views/sale_order_views.xml',
