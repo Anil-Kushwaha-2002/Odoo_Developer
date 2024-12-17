@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- views/account_move_inherit_view.xml -->
+<odoo>
+
+    <record id="view_move_form_custom_button" model="ir.ui.view">
+        <field name="name">account.move.form.custom.button</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <!-- Add the button in the header or toolbar of the invoice form -->
+            <xpath expr="//header" position="inside">
+                <button name="duplicate_invoice"
+                        type="object"
+                        class="oe_highlight"
+                        string="Duplicate Invoice"
+                        icon="fa-cog" />
+            </xpath>
+        </field>
+    </record>
+
+<!--    <script>-->
+<!--        $(document).ready(function() {-->
+<!--        $('.oe_stat_button[name="action_duplicate"]').click(function() {-->
+<!--        var invoice = $('.oe_form').data('record');-->
+<!--        invoice.duplicate_invoice();-->
+<!--        });-->
+<!--        });-->
+<!--    </script>-->
+
+</odoo>
+
+
+
+
+<!--<odoo>-->
+
+<!--    <record id="view_account_invoice_form_inherit" model="ir.ui.view">-->
+<!--        <field name="name">account.invoice.form.inherit</field>-->
+<!--        <field name="model">account.move</field>-->
+<!--        <field name="inherit_id" ref="account.view_move_form"/> &lt;!&ndash; Check this ref &ndash;&gt;-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Account Entry" js_class="account_move_form">-->
+<!--                <header>-->
+
+<!--                    <xpath expr="//header" position="inside">-->
+<!--                        <button name="action_duplicate_invoice_sql" string="Duplicate" type="object"-->
+<!--                                class="btn-primary"/>-->
+<!--                    </xpath>-->
+<!--                    &lt;!&ndash; Post &ndash;&gt;-->
+<!--                    &lt;!&ndash; Add your buttons here &ndash;&gt;-->
+<!--                </header>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+
+<!--</odoo>-->

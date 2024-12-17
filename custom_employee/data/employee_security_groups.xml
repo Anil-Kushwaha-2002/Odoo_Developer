@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<!--    &lt;!&ndash; Custom HR Category &ndash;&gt;-->
+<!--    <record id="module_category_custom_hr" model="ir.module.category">-->
+<!--        <field name="name">Custom HR</field>-->
+<!--        <field name="description">Custom HR category</field>-->
+<!--        <field name="sequence">10</field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; HR Manager Group &ndash;&gt;-->
+<!--    <record id="group_hr_manager" model="res.groups">-->
+<!--        <field name="name">HR Manager</field>-->
+<!--        <field name="category_id" ref="module_category_custom_hr"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Technical Manager Group &ndash;&gt;-->
+<!--    <record id="group_technical_manager" model="res.groups">-->
+<!--        <field name="name">Technical Manager</field>-->
+<!--        <field name="category_id" ref="module_category_custom_hr"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Finance Manager Group &ndash;&gt;-->
+<!--    <record id="group_finance_manager" model="res.groups">-->
+<!--        <field name="name">Finance Manager</field>-->
+<!--        <field name="category_id" ref="module_category_custom_hr"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Final Approver Group &ndash;&gt;-->
+<!--    <record id="group_final_approver" model="res.groups">-->
+<!--        <field name="name">Final Approver</field>-->
+<!--        <field name="category_id" ref="module_category_custom_hr"/>-->
+<!--    </record>-->
+
+
+
+
+
+
+<!--    &lt;!&ndash; HR Manager Group &ndash;&gt;-->
+<!--    <record id="group_hr_manager" model="res.groups">-->
+<!--        <field name="name">HR Manager</field>-->
+<!--        <field name="category_id" ref="base.module_category_hr"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Technical Manager Group &ndash;&gt;-->
+<!--    <record id="group_technical_manager" model="res.groups">-->
+<!--        <field name="name">Technical Manager</field>-->
+<!--        <field name="category_id" ref="base.module_category_hr"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Finance Manager Group &ndash;&gt;-->
+<!--    <record id="group_finance_manager" model="res.groups">-->
+<!--        <field name="name">Finance Manager</field>-->
+<!--        <field name="category_id" ref="base.module_category_hr"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Final Approver Group &ndash;&gt;-->
+<!--    <record id="group_final_approver" model="res.groups">-->
+<!--        <field name="name">Final Approver</field>-->
+<!--        <field name="category_id" ref="base.module_category_hr"/>-->
+<!--    </record>-->
+
+
+
+
+</odoo>
+

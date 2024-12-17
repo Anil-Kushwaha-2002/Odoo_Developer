@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Employee Form View -->
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">employee.form</field>
+        <field name="model">custom.employee</field>
+        <field name="arch" type="xml">
+            <form string="Employee Form">
+
+
+              <header>
+                <!-- Statusbar -->
+                <field name="state" widget="statusbar" statusbar_visible="draft,hr_approval,technical_approval,finance_approval,approved"/>
+
+                <!-- Approval Buttons -->
+                <button name="action_approve_hr" string="Approve HR" type="object" class="btn-primary" />
+                <button name="action_approve_tech" string="Approve Technical" type="object" class="btn-primary" />
+                <button name="action_approve_finance" string="Approve Finance" type="object" class="btn-primary"/>
+                <button name="action_final_approve" string="Final Approve" type="object" class="btn-success" />
+            </header>
+
+
+
+<!--                                 <header>-->
+<!--                        &lt;!&ndash; Statusbar Visibility &ndash;&gt;-->
+<!--                        <field name="state" widget="statusbar" statusbar_visible="draft,hr_approval,technical_approval,finance_approval,approved"/>-->
+<!--                        &lt;!&ndash; Button Visibility &ndash;&gt;-->
+<!--                        <button name="action_approve_hr" string="Approve HR" type="object" class="btn-primary" groups="custom_employee_module.group_hr_manager" invisible="state != 'draft'"/>-->
+<!--                        <button name="action_approve_tech"  string="Approve Technical" type="object" class="btn-primary" groups="custom_employee_module.group_technical_manager" invisible="state != 'hr_approval'" />-->
+<!--                        <button name="action_approve_finance"  string="Approve Finance" type="object" class="btn-primary" groups="custom_employee_module.group_finance_manager" invisible="state != 'technical_approval'" />-->
+<!--                        <button name="action_final_approve"  string="Final Approve" type="object" class="btn-success" groups="custom_employee_module.group_final_approver" invisible="state != 'finance_approval'" />-->
+<!--                    </header>-->
+
+
+
+
+     <!-- Form Fields -->
+                <sheet>
+                    <group>
+                        <group>
+                              <field name="name"/>
+                            <field name="department"/>
+                            <field name="designation"/>
+                            <field name="manager_id"/>
+                        </group>
+                        <group>
+                            <field name="salary"/>
+                            <field name="age"/>
+                        </group>
+
+                    </group>
+
+                    <notebook>
+                            <!-- 1st Page for Order Lines -->
+                            <page string="Employee States " name ='employee_states'>
+                                <field name="order_line_ids">
+                                    <tree editable="bottom">
+                                         <field name="employee_id"/>
+                                         <field name="line_date"/>
+                                         <field name="approved_by_hr"/>
+                                         <field name="approved_by_tech_manager"/>
+                                         <field name="approved_by_fin_manager"/>
+                                         <field name="approved_by_react"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                        <!-- 2nd Page for Additional Information -->
+                            <page string="Additional Info">
+                               <group>
+                                    <field name="name"/>
+                                   <field name="age"/>
+                                   <field name="date_of_joining"/>
+                               </group>
+                            </page>
+                        </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+      <!-- Tree View -->
+    <record id="view_employee_tree" model="ir.ui.view">
+        <field name="name">employee.tree</field>
+        <field name="model">custom.employee</field>
+        <field name="arch" type="xml">
+            <tree string="Employee List">
+                <field name="name"/>
+                <field name="department"/>
+                <field name="designation"/>
+                <field name="age"/>
+<!--                <field name="salary"/>-->
+                <field name="state"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+
+      <!--   Action   -->
+    <record id="action_custom_employee" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">custom.employee</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_id" ref="view_employee_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first purchase order
+            </p>
+        </field>
+    </record>
+
+
+
+    <!-- Employee Main Menu Root -->
+    <menuitem id="menu_custom_employee_root" name="Employee"/>
+
+
+    <!-- Employee submenu -->
+    <menuitem id="menu_custom_employee" name="Employees" parent="menu_custom_employee_root" sequence="20" action="action_custom_employee"/>
+
+
+    <!-- States  -->
+    <menuitem id="menu_custom_employee_states" name="States" parent="menu_custom_employee_root" sequence="30" action="action_custom_employee"/>
+   <!-- submenu States  -->
+    <menuitem id="menu_employee_order_line_states" name="State" parent="menu_custom_employee_states" sequence="31" action="action_custom_employee"/>
+
+
+   <!-- Attendance-->
+   <menuitem id="menu_custom_employee_attendance" name="Attendance" parent="menu_custom_employee_root" sequence="40" action="action_custom_employee"/>
+
+
+</odoo>

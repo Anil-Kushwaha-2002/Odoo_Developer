@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<!--    XML Security Groups and Access Rights -->
+    <!-- Module Category -->
+    <record id="module_category_profile" model="ir.module.category">
+        <field name="name">HR Approved</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <!-- Security Groups -->
+    <!-- HR Manager Group -->
+    <record id="group_hr_manager" model="res.groups">
+        <field name="name">HR Manager</field>
+        <field name="category_id" ref="module_category_profile"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+    </record>
+
+    <!-- Technical Manager Group -->
+    <record id="group_technical_manager" model="res.groups">
+        <field name="name">Technical Manager</field>
+        <field name="category_id" ref="module_category_profile"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user'), ref('group_hr_manager')])]"/>
+    </record>
+
+    <!-- Finance Manager Group -->
+    <record id="group_finance_manager" model="res.groups">
+        <field name="name">Finance Manager</field>
+        <field name="category_id" ref="module_category_profile"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user'), ref('group_technical_manager')])]"/>
+    </record>
+
+    <!-- Final Approver Group -->
+    <record id="group_final_approver" model="res.groups">
+        <field name="name">Final Approver</field>
+        <field name="category_id" ref="module_category_profile"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user'), ref('group_finance_manager')])]"/>
+    </record>
+
+
+
+
+    <!-- Access Rights -->
+    <!-- HR Manager Access -->
+    <record id="access_profile_access_hr_approver" model="ir.model.access">
+        <field name="name">profile.access HR Approver</field>
+        <field name="model_id" ref="custom_employee.model_custom_employee"/>
+        <field name="group_id" ref="custom_employee.group_hr_manager"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Technical Manager Access -->
+    <record id="access_profile_access_tech_approver" model="ir.model.access">
+        <field name="name">profile.access Tech Approver</field>
+        <field name="model_id" ref="custom_employee.model_custom_employee"/>
+        <field name="group_id" ref="custom_employee.group_technical_manager"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Finance Manager Access -->
+    <record id="access_profile_access_fin_approver" model="ir.model.access">
+        <field name="name">profile.access Fin Approver</field>
+        <field name="model_id" ref="custom_employee.model_custom_employee"/>
+        <field name="group_id" ref="custom_employee.group_finance_manager"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Final Approver Access -->
+    <record id="access_profile_access_final_approver" model="ir.model.access">
+        <field name="name">profile.access Final Approver</field>
+        <field name="model_id" ref="custom_employee.model_custom_employee"/>
+        <field name="group_id" ref="custom_employee.group_final_approver"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+</odoo>
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<odoo>-->
+
+<!--    &lt;!&ndash; Module Category &ndash;&gt;-->
+<!--    <record id="module_category_profile" model="ir.module.category">-->
+<!--        <field name="name">HR Approved</field>-->
+<!--        <field name="sequence">5</field>-->
+<!--    </record>-->
+
+<!--&lt;!&ndash;  Security Groups &ndash;&gt;-->
+<!--    &lt;!&ndash; HR Group &ndash;&gt;-->
+<!--    <record id="group_hr_manager" model="res.groups">-->
+<!--        <field name="name">HR Manager</field>-->
+<!--        <field name="category_id" ref="module_category_profile"/>-->
+<!--        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Technical Manager Group &ndash;&gt;-->
+<!--    <record id="group_technical_manager" model="res.groups">-->
+<!--        <field name="name">Technical Manager</field>-->
+<!--        <field name="category_id" ref="module_category_profile"/>-->
+<!--        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Finance Manager Group &ndash;&gt;-->
+<!--    <record id="group_finance_manager" model="res.groups">-->
+<!--        <field name="name">Finance Manager</field>-->
+<!--        <field name="category_id" ref="module_category_profile"/>-->
+<!--        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Final Approver Group &ndash;&gt;-->
+<!--    <record id="group_final_approver" model="res.groups">-->
+<!--        <field name="name">Final Approver</field>-->
+<!--        <field name="category_id" ref="module_category_profile"/>-->
+<!--        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>-->
+<!--    </record>-->
+
+
+<!--&lt;!&ndash;  Access Rights &ndash;&gt;-->
+<!--&lt;!&ndash;    HR &ndash;&gt;-->
+<!--    <record id="access_profile_access_hr_approver" model="ir.model.access">-->
+<!--    <field name="name">profile.access HR Approver</field>-->
+<!--    <field name="model_id" ref="model_custom_employee"/>-->
+<!--    <field name="group_id" ref="group_hr_manager"/>-->
+<!--    <field name="perm_read" eval="1"/>-->
+<!--    <field name="perm_write" eval="1"/>-->
+<!--    <field name="perm_create" eval="1"/>-->
+<!--    <field name="perm_unlink" eval="1"/>-->
+<!--</record>-->
+
+<!--&lt;!&ndash;    Tech&ndash;&gt;-->
+<!--       <record id="access_profile_access_tech_approver" model="ir.model.access">-->
+<!--    <field name="name">profile.access Tech Approver</field>-->
+<!--    <field name="model_id" ref="model_custom_employee"/>-->
+<!--    <field name="group_id" ref="group_technical_manager"/>-->
+<!--    <field name="perm_read" eval="1"/>-->
+<!--    <field name="perm_write" eval="1"/>-->
+<!--    <field name="perm_create" eval="1"/>-->
+<!--    <field name="perm_unlink" eval="1"/>-->
+<!--</record>-->
+
+
+<!-- &lt;!&ndash;    Fin &ndash;&gt;-->
+<!--    <record id="access_profile_access_fin_approver" model="ir.model.access">-->
+<!--    <field name="name">profile.access Fin Approver</field>-->
+<!--    <field name="model_id" ref="model_custom_employee"/>-->
+<!--    <field name="group_id" ref="group_finance_manager"/>-->
+<!--    <field name="perm_read" eval="1"/>-->
+<!--    <field name="perm_write" eval="1"/>-->
+<!--    <field name="perm_create" eval="1"/>-->
+<!--    <field name="perm_unlink" eval="1"/>-->
+<!--</record>-->
+<!-- &lt;!&ndash;    Final  &ndash;&gt;-->
+<!--    <record id="access_profile_access_final_approver" model="ir.model.access">-->
+<!--    <field name="name">profile.access Final Approver</field>-->
+<!--    <field name="model_id" ref="model_custom_employee"/>-->
+<!--    <field name="group_id" ref="group_final_approver"/>-->
+<!--    <field name="perm_read" eval="1"/>-->
+<!--    <field name="perm_write" eval="1"/>-->
+<!--    <field name="perm_create" eval="1"/>-->
+<!--    <field name="perm_unlink" eval="1"/>-->
+<!--</record>-->
+
+<!--</odoo>-->
+
+
+
+
+
+

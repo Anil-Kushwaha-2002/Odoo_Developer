@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="custom_report_saleorder" inherit_id="sale.report_saleorder_document">
+
+        <!-- Replace the partner information section -->
+        <xpath expr="//div[@t-field='doc.partner_id']" position="replace">
+            <div t-field="doc.partner_id"
+                 t-options="{'widget': 'contact', 'fields': ['address'], 'no_marker': True}"/>
+            <header>
+                <div>
+                    <a t-attf-href="">
+                        <h1 t-field="doc.partner_id.name" style="margin: 0; font-size: 24px; font-weight: bold;"/>
+                    </a>
+                </div>
+            </header>
+        </xpath>
+
+
+<!--        &lt;!&ndash; Replace another section in the report with custom content &ndash;&gt;-->
+<!--        <xpath expr="//div[@class='row mt-4 mb-2' and @id='informations']" position="replace">-->
+<!--        </xpath>-->
+
+
+        <!-- Modify the table header to add a custom UOM column -->
+        <xpath expr="//table[@class='table table-sm o_main_table table-borderless mt-4']/thead/tr[1]" position="inside">
+            <th name="th_uom" class="text-end">UOM</th>
+        </xpath>
+
+
+        <!-- Modify the table body to add a custom UOM column after the product name -->
+         <xpath expr="//table[@class='table table-sm o_main_table table-borderless mt-4']/tbody/t/tr/t/td[@name='td_subtotal']"
+               position="after">
+            <td name="td_uom" class="text-end">
+                <span t-field="line.product_uom"/>
+            </td>
+        </xpath>
+
+
+    </template>
+
+</odoo>
+
+
+
+
