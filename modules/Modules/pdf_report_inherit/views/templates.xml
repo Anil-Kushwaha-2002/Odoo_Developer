@@ -1,0 +1,79 @@
+<!--<odoo>-->
+<!--    <data>-->
+<!--        <template id="report_saleorder_document_custom" inherit_id="sale.report_saleorder_document">-->
+<!--    &lt;!&ndash; Adding Invoicing and Shipping Address Next to the Order No &ndash;&gt;-->
+<!--    <xpath expr="//div[@class='page']" position="inside">-->
+<!--        <div class="row">-->
+<!--            <div class="col-6">-->
+<!--                <h2 t-field="o.name" style="margin-bottom: 0px;"/>-->
+<!--                <p>-->
+<!--                    <strong>Invoicing and Shipping Address:</strong><br/>-->
+<!--                    <span t-field="o.partner_id.name"/> <br/>-->
+<!--                    <span t-field="o.partner_id.street"/> <br/>-->
+<!--                    <span t-field="o.partner_id.city"/> <br/>-->
+<!--                    <span t-field="o.partner_id.country_id.name"/> <br/>-->
+<!--                    <span t-field="o.partner_id.phone"/>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--            <div class="col-6" style="text-align: right;">-->
+<!--                <p>-->
+<!--                    <span t-field="o.partner_invoice_id.street"/> <br/>-->
+<!--                    <span t-field="o.partner_invoice_id.city"/> <br/>-->
+<!--                    Tax ID: <span t-field="o.partner_id.vat"/>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </xpath>-->
+
+<!--    &lt;!&ndash; Correct XPath to Add UOM Column in the Table Header &ndash;&gt;-->
+<!--    <xpath expr="//table[@class='table table-sm o_main_table']/thead/tr/th[@name='th_description']" position="after">-->
+<!--        <th>UOM</th>-->
+<!--    </xpath>-->
+
+<!--   <xpath expr="//table[@class='table table-sm o_main_table table-borderless mt-4']/tbody/t/tr/t/td[@name='td_name']"-->
+<!--       position="after">-->
+<!--    <td name="td_uom" class="text-end">-->
+<!--        <span t-field="line.product_uom"/>-->
+<!--    </td>-->
+<!--</xpath>-->
+<!--</template>-->
+
+<!--    </data>-->
+<!--</odoo>-->
+<odoo>
+    <template id="custom_report_saleorder" inherit_id="sale.report_saleorder_document">
+
+
+        <xpath expr="//div[@t-field='doc.partner_id']" position="replace">
+            <div t-field="doc.partner_id"
+                 t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+            <header style="text-align: left; position: absolute; left: 0; top: 0; width: 100%; padding: 10px;">
+                <div>
+                    <a t-attf-href="">
+                        <h1 t-field="doc.partner_id.name" style="margin: 0; font-size: 24px; font-weight: bold;"/>
+                    </a>
+                </div>
+            </header>
+        </xpath>
+
+
+        <!--        <xpath expr="//div[@class='row mt-4 mb-2' and @id='informations']" position="replace">-->
+        <!--        </xpath>-->
+
+
+        <xpath expr="//table[@class='table table-sm o_main_table table-borderless mt-4']/thead/tr/th[@name='th_description']"
+               position="after">
+
+            <th name="th_new_uom" class="text-end">UOM</th>
+
+
+        </xpath>
+
+        <xpath expr="//table[@class='table table-sm o_main_table table-borderless mt-4']/tbody/t/tr/t/td[@name='td_name']"
+               position="after">
+            <td name="td_uom" class="text-end">
+                <span t-field="line.product_uom"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>

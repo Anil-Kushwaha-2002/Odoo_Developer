@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_order_form_custom" model="ir.ui.view">
+        <field name="name">sale.order.form.custom</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Replace the Confirm button with custom attributes -->
+            <xpath expr="//header/button[@name='action_confirm']" position="replace">
+                <button name="action_confirm" string="Confirm" type="object"
+                        class="btn-primary" context="{'validate_analytic': True}"
+                        modifiers="{'invisible': [('state', '!=', 'draft')]}"/>
+            </xpath>
+
+            <!-- Modify the attributes of the existing 'Send by Email' button -->
+            <xpath expr="//header/button[@name='action_quotation_send']" position="attributes">
+                <attribute name="class">btn-primary</attribute>
+                <attribute name="context">{'validate_analytic': True}</attribute>
+                <attribute name="modifiers">{'invisible': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

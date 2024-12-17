@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_name_mode_shipment_master,access_mode_of_shipment_master,model_shipment_mode,,1,1,1,1
