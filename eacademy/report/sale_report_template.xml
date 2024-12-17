@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <template id="custom_report_saleorder" inherit_id="sale.report_saleorder_document">-->
+
+<!--        &lt;!&ndash; Replace the partner information section &ndash;&gt;-->
+<!--        <xpath expr="//div[@t-field='doc.partner_id']" position="replace">-->
+<!--            <div t-field="doc.partner_id"-->
+<!--                 t-options="{'widget': 'contact', 'fields': ['address'], 'no_marker': True}"/>-->
+<!--            <header>-->
+<!--                <div>-->
+<!--                    <a t-attf-href="">-->
+<!--                        <h1 t-field="doc.partner_id.name" style="margin: 0; font-size: 24px; font-weight: bold;"/>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </header>-->
+<!--        </xpath>-->
+
+
+<!--&lt;!&ndash;        &lt;!&ndash; Replace another section in the report with custom content &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <xpath expr="//div[@class='row mt-4 mb-2' and @id='informations']" position="replace">&ndash;&gt;-->
+<!--&lt;!&ndash;        </xpath>&ndash;&gt;-->
+
+
+<!--        &lt;!&ndash; Modify the table header to add a custom UOM column &ndash;&gt;-->
+<!--        <xpath expr="//table[@class='table table-sm o_main_table table-borderless mt-4']/thead/tr[1]" position="inside">-->
+<!--            <th name="th_uom" class="text-end">UOM</th>-->
+<!--        </xpath>-->
+
+<!--        &lt;!&ndash; Modify the table body to add a custom UOM column after the product name &ndash;&gt;-->
+<!--        <xpath expr="//table[@class='table table-sm o_main_table table-borderless mt-4']" position="inside">-->
+<!--            <xpath expr="tbody/tr/td[1][@name='td_name']" position="after">-->
+<!--                <td name="td_uom" class="text-end">-->
+<!--                    <span t-field="line.product_uom.display_name"/>-->
+<!--                </td>-->
+<!--            </xpath>-->
+<!--        </xpath>-->
+
+<!--        &lt;!&ndash;        <td class="text-start">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <t t-foreach="line.order_line" t-as="line">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <t t-esc="line.product_uom_id.display_name"/>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </t>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </td>&ndash;&gt;-->
+
+
+<!--    </template>-->
+
+</odoo>
+
+
+
+

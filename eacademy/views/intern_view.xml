@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View for Intern -->
+    <record model="ir.ui.view" id="intern_form_view">
+        <field name="name">intern.form.view</field>
+        <field name="model">intern.class</field>
+        <field name="arch" type="xml">
+            <form string="Intern">
+                <header>
+                    <button string="Start" type="object" name="action_start" groups="base.group_user" class="btn-primary"/>
+                    <button string="Complete" type="object" name="action_complete" groups="base.group_user" class="btn-success"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,ongoing,completed"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="day"/>
+                        </group>
+                        <group>
+                            <field name="feedback"/>
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+        <!-- Tree View for Intern -->
+    <record model="ir.ui.view" id="intern_tree_view">
+        <field name="name">intern.tree.view</field>
+        <field name="model">intern.class</field>
+        <field name="arch" type="xml">
+            <tree string="Intern">
+                <field name="name"/>
+                <field name="day"/>
+                <field name="feedback"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Action for Intern -->
+    <record id="action_intern_class" model="ir.actions.act_window">
+        <field name="name">Intern</field>
+        <field name="res_model">intern.class</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_eacademy_root" name="EAcademy" sequence="1"/>
+    <menuitem id="eacademy_menu" name="Eacademy" parent="menu_eacademy_root" sequence="2"/>
+    <menuitem id="intern_menu" name="Intern" parent="menu_eacademy_root" action="action_intern_class"/>
+    <menuitem id="menu_intern" name="Intern Class" parent="eacademy_menu" action="action_intern_class"/>
+
+</odoo>
+
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+
+<!--    &lt;!&ndash; Form View for Intern&ndash;&gt;-->
+<!--    <record model="ir.ui.view" id="intern_form_view">-->
+<!--        <field name="name">intern.form.view</field>-->
+<!--        <field name="model">intern.class</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Intern">-->
+<!--                <header>-->
+<!--                    &lt;!&ndash; Use 'groups' if you need to restrict button visibility based on user groups &ndash;&gt;-->
+<!--                    &lt;!&ndash; For dynamic visibility based on record state, handle it in the model methods &ndash;&gt;-->
+<!--                    <button string="Start" type="object" name="action_start"-->
+<!--                            groups="base.group_user" class="btn-primary"/>-->
+<!--                    <button string="Complete" type="object" name="action_complete"-->
+<!--                            groups="base.group_user" class="btn-success"/>-->
+<!--                    <field name="state" widget="statusbar" statusbar_visible="draft,ongoing,completed"/>-->
+<!--                </header>-->
+
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="day"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="feedback"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Action for Intern &ndash;&gt;-->
+<!--    <record id="action_intern_class" model="ir.actions.act_window">-->
+<!--        <field name="name">Intern</field>-->
+<!--        <field name="res_model">intern.class</field>-->
+<!--        <field name="view_mode">tree,form,kanban,graph</field>-->
+<!--    </record>-->
+
+<!--&lt;!&ndash;    Menu Item &ndash;&gt;-->
+
+<!--    <menuitem id="menu_eacademy_root" name="EAcademy" sequence="1"/>-->
+<!--    <menuitem id="eacademy_menu" name="Eacademy" parent="menu_eacademy_root" sequence="2"/>-->
+<!--    <menuitem id="intern_menu" name="Intern" parent="menu_eacademy_root" action="action_intern_class"/>-->
+<!--    <menuitem id="menu_intern" name="Intern Class" parent="eacademy_menu" action="action_intern_class"/>-->
+
+<!--</odoo>-->
+
+
+

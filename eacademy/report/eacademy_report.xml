@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--    PDF  Report   -->
+    <record id="action_report_eacademy_course" model="ir.actions.report">
+        <field name="name">Course PDF Report</field>
+        <field name="name">Course PDF </field>
+        <field name="model">eacademy.course</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">eacademy.report_course</field>
+        <field name="report_file">eacademy.report_course</field>
+        <field name="binding_model_id" ref="model_eacademy_course"/>
+        <field name="binding_type">report</field>
+
+    </record>
+
+</odoo>
+
+
+
+<!-- 1) I use external_layout but, image logo, company name, and other detail are not see -->
+
+
+
+
+
+
+
+
+
+<!--    <template id="report_course">-->
+<!--&lt;!&ndash;        <t t-call="web.external_layout">&ndash;&gt;-->
+
+<!--          <t t-call="web.basic_layout">-->
+<!--            <main>-->
+<!--            <div class="page">-->
+<!--                <div class="oe_structure"/>-->
+<!--                <h1>Course Report</h1>-->
+<!--                <img src="data:image/png;base64,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" alt="Your Image" style="width:100px;"/>-->
+<!--                <p>Eacademy</p>-->
+<!--                <p>Date: <t t-esc="time.strftime('%Y-%m-%d')"/></p>-->
+<!--                <h3>This report provides a detailed overview of the courses available in the eAcademy system.</h3>-->
+<!--                <table class="table table-sm o_main_table">-->
+<!--                    <thead>-->
+<!--                        <tr>-->
+<!--                            <th>Name</th>-->
+<!--                            <th>Age</th>-->
+<!--                            <th>Course</th>-->
+<!--                            <th>Start Date</th>-->
+<!--                            <th>End Date</th>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                        <tr t-foreach="docs" t-as="doc">-->
+<!--                            <td><span t-field="doc.name"/></td>-->
+<!--                            <td><span t-field="doc.age"/></td>-->
+<!--                            <td><span t-field="doc.course"/></td>-->
+<!--                            <td><span t-field="doc.start_date"/></td>-->
+<!--                            <td><span t-field="doc.end_date"/></td>-->
+<!--                        </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--                </div>-->
+<!--            </main>-->
+
+<!--                &lt;!&ndash; Footer &ndash;&gt;-->
+<!--            <t t-extend="web.external_layout_footer">-->
+<!--                <t t-jquery="div.footer" t-operation="prepend">-->
+<!--                    <hr/>-->
+<!--                    <div class="footer" style="text-align: center;">-->
+<!--                        <p>Company Name</p>-->
+<!--                        <p>Address Line 1, Address Line 2</p>-->
+<!--                        <p>Phone: +123 456 7890 | Email: info@company.com</p>-->
+<!--                        <p>Website: www.company.com</p>-->
+<!--                        <p>Page: <span class="page"/></p>-->
+<!--                    </div>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </template>-->
+
+<!--</odoo>-->
+
+
+
+
+
+
+
+

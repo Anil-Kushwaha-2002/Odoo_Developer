@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Corrective Maintenance Request Action -->
+        <record id="corrective_maintenance_request_window" model="ir.actions.act_window">
+            <field name="name">Corrective Maintenance Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.request</field>
+            <field name="domain">[('maintenance_type', '=', 'corrective')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!-- Preventive Maintenance Request Action -->
+        <record id="preventive_maintenance_request_window" model="ir.actions.act_window">
+            <field name="name">Preventive Maintenance Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.request</field>
+            <field name="domain">[('maintenance_type', '=', 'preventive')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!-- Move Out Process Maintenance Request Action -->
+        <record id="move_out_process_maintenance_request_window" model="ir.actions.act_window">
+            <field name="name">Move Out Maintenance Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.request</field>
+            <field name="domain">[('maintenance_type', '=', 'move_out_process')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!-- Move In Process Maintenance Request Action -->
+        <record id="move_in_process_maintenance_request_window" model="ir.actions.act_window">
+            <field name="name">Move In Maintenance Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.request</field>
+            <field name="domain">[('maintenance_type', '=', 'move_in_process')]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem id="corrective_maintenance_request_menuitem" name="Corrective Maintenance Request"
+                  parent="maintenance.menu_m_request" action="corrective_maintenance_request_window" sequence="1"/>
+
+        <menuitem id="preventive_maintenance_request_menuitem" name="Preventive Maintenance Request"
+                  parent="maintenance.menu_m_request" action="preventive_maintenance_request_window" sequence="2"/>
+
+        <menuitem id="move_out_process_maintenance_request_menuitem" name="Move Out Maintenance Request"
+                  parent="maintenance.menu_m_request" action="move_out_process_maintenance_request_window" sequence="3"/>
+
+        <menuitem id="move_in_process_maintenance_request_menuitem" name="Move In Maintenance Request"
+                  parent="maintenance.menu_m_request" action="move_in_process_maintenance_request_window" sequence="4"/>
+    </data>
+</odoo>

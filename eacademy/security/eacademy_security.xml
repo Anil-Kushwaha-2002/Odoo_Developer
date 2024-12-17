@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--  security/eacademy_security.xml-->
+<!--    <data noupdate="1">-->
+<!--        &lt;!&ndash; Grant read access to eacademy.course.line to all users &ndash;&gt;-->
+<!--        <record id="eacademy_course_line_user" model="ir.model.access">-->
+<!--            <field name="name">eacademy.course.line user</field>-->
+<!--            <field name="model_id" ref="model_eacademy_course_line"/>-->
+<!--            <field name="group_id" ref="base.group_user"/>-->
+<!--            <field name="perm_read" eval="1"/>-->
+<!--            <field name="perm_write" eval="0"/>-->
+<!--            <field name="perm_create" eval="0"/>-->
+<!--            <field name="perm_unlink" eval="0"/>-->
+<!--        </record>-->
+<!--    </data>-->
+</odoo>

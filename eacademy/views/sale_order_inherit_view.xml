@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+    <!-- Add new field in Sale Order ( Name , Age, Payment) in sale order ( in main part )  -->
+        <record id="sale_order_view_form" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- Add your XML content here if needed -->
+
+<!-- Add fild after Customer -->
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="name"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="age"/>
+                </xpath>
+
+<!--Add fild after Payment Terms -->
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="payment_type"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="name"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="age"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+<!-- if use Add both (in Main part and Order Line)  then one is delete (hide) -->
+
+<!-- Add new field in Order Lines ( Name , Age, Payment, Description ) in sale order line ( in other info )  -->
+
+
+    <record id="sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Add your XML content here if needed -->
+
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="description"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="payment_type"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="age"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="name"/>
+            </xpath>
+        </field>
+    </record>
+
+
+<!--    Menu Item  -->
+    <menuitem id="menu_eacademy_course" name="Courses" parent="sale.menu_sales_config" action="action_eacademy_course" sequence="10"/>
+
+<!--    <menuitem id="menu_eacademy_classsession" name="Approvable" parent="sale.menu_reporting_sales" action="action_eacademy_classsession" sequence="50"/>-->
+<!--        <menuitem id="menu_eacademy_course" name="Approvable" parent="sale.menu_reporting_sales" action="action_eacademy" sequence="50"/>-->
+
+
+    </data>
+</odoo>
+
+
+<!-- Note -->
+<!--  1) if use Add both (in Main part and Order Line)  then one is delete (hide) the field  ?? -->

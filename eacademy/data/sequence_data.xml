@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    sequence will provide unique identifiers for the name_seq field in your "eacademy.course" model. -->
+    <data noupdate="1">
+        <record id="seq_eacademy_course" model="ir.sequence">
+            <field name="name">Eacademy Course Sequence</field>
+            <field name="code">eacademy.course</field>
+            <field name="prefix">EC</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+
+
+
+    <!--    sequence will provide unique identifiers for the name_seq field in your "intern.class" model. -->
+
+        <record id="seq_eacademy_intern" model="ir.sequence">
+            <field name="name">Eacademy Intern Sequence</field>
+            <field name="code">intern.class</field>
+            <field name="prefix">IC</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+    </data>
+
+</odoo>

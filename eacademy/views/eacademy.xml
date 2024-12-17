@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="view_eacademy_course_form" model="ir.ui.view">
+        <field name="name">eacademy.course.form</field>
+        <field name="model">eacademy.course</field>
+        <field name="arch" type="xml">
+            <form string="Course">
+                <header>
+                    <button string="Start" type="object" name="action_start" class="btn-primary" odoo='{"visible": [["state", "=", "draft"]]}'/>
+                    <button string="Complete" type="object" name="action_complete" class="btn-success" odoo='{"visible": [["state", "=", "ongoing"]]}'/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,ongoing,completed"/>
+
+                    <!-- Print Button -->
+                    <button string="Print Report" type="action" name="%(action_report_eacademy_course)d" class="oe_highlight"/>
+
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name_seq" readonly="1"/>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="course"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="description"/>
+                        </group>
+                    </group>
+<!--                    <notebook>-->
+<!--                        <page string="Lines">-->
+<!--                            <field name="line_ids">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="name"/>-->
+<!--                                    <field name="quantity"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <!-- Tree View -->
+    <record id="view_eacademy_course_tree" model="ir.ui.view">
+        <field name="name">eacademy.course.tree</field>
+        <field name="model">eacademy.course</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name_seq" readonly="1"/>
+                <field name="name"/>
+                 <field name="age"/>
+                <field name="course"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_eacademy_course_kanban" model="ir.ui.view">
+        <field name="name">eacademy.course.kanban</field>
+        <field name="model">eacademy.course</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <field name="name"/>
+                            </div>
+                            <div class="o_kanban_details">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <field name="course"/>
+                                </div>
+                                <div>
+                                    <field name="state"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="view_eacademy_course_graph" model="ir.ui.view">
+        <field name="name">eacademy.course.graph</field>
+        <field name="model">eacademy.course</field>
+        <field name="arch" type="xml">
+            <graph string="Course Graph">
+                <field name="start_date" type="date"/>
+                <field name="state" type="selection"/>
+                <field name="name" type="char"/>
+                <field name="age" type="integer"/>
+                <field name="course" type="char"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Calendar View -->
+    <record id="view_eacademy_course_calendar" model="ir.ui.view">
+        <field name="name">eacademy.course.calendar</field>
+        <field name="model">eacademy.course</field>
+        <field name="arch" type="xml">
+            <calendar string="Course Calendar" date_start="start_date" >
+                <field name="name" type="char"/>
+                <field name="description" type="text"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Define search view -->
+    <record id="view_eacademy_course_search" model="ir.ui.view">
+        <field name="name">eacademy.course.search</field>
+        <field name="model">eacademy.course</field>
+        <field name="arch" type="xml">
+            <search string="Courses">
+                <field name="name"/>
+                <field name="course"/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_ongoing" string="Ongoing" domain="[('state', '=', 'ongoing')]"/>
+                <filter name="filter_completed" string="Completed" domain="[('state', '=', 'completed')]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action Definition -->
+    <record id="action_eacademy_course" model="ir.actions.act_window">
+        <field name="name">Courses</field>
+        <field name="res_model">eacademy.course</field>
+        <field name="view_mode">tree,form,kanban,graph,calendar</field>
+        <field name="view_id" ref="view_eacademy_course_tree"/>
+        <field name="search_view_id" ref="view_eacademy_course_search"/>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_eacademy_root" name="EAcademy" />
+    <menuitem id="eacademy_menu" name="Eacademy" parent="menu_eacademy_root" action="action_eacademy_course"  sequence="1" />
+    <menuitem id="menu_eacademy_course" name="Courses" parent="eacademy_menu" action="action_eacademy_course" sequence="2" />
+
+
+
+
+
+<!--     Class Sessions View -->
+
+<!--     Form View for Class Sessions-->
+
+
+    <record model="ir.ui.view" id="classsession_form_view">
+        <field name="name">classsession.form</field>
+        <field name="model">eacademy.classsession</field>
+        <field name="arch" type="xml">
+            <form string="Class Session Form">
+                <sheet>
+                    <group>
+                        <group string="Class Session">
+                            <field name="name"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="currency_id"/>
+                            <field name="day_rate"/>
+                            <field name="days"/>
+                            <field name="total_rent"/>
+                        </group>
+                        <group>
+                            <field name="value"/>
+                            <field name="value2" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Class Sessions -->
+    <record model="ir.ui.view" id="classsession_tree_view">
+        <field name="name">classsession.tree</field>
+        <field name="model">eacademy.classsession</field>
+        <field name="arch" type="xml">
+            <tree string="Session Tree">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="day_rate"/>
+                <field name="days"/>
+                <field name="total_rent"/>
+                <field name="currency_id"/>
+
+                <field name="value"/>
+                <field name="value2" readonly="1"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View for Class Sessions -->
+    <record model="ir.ui.view" id="view_classsession_kanban">
+        <field name="name">classsession.kanban</field>
+        <field name="model">eacademy.classsession</field>
+        <field name="arch" type="xml">
+            <kanban string="Class Sessions">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <field name="name"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="day_rate"/>
+                            <field name="days"/>
+                            <field name="total_rent"/>
+                            <field name="currency_id"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Pivot View for Class Sessions -->
+    <record model="ir.ui.view" id="view_classsession_pivot">
+        <field name="name">classsession.pivot</field>
+        <field name="model">eacademy.classsession</field>
+        <field name="arch" type="xml">
+            <pivot string="Class Sessions">
+                <field name="name" type="row"/>
+                <field name="start_date" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Graph View for Class Sessions -->
+    <record model="ir.ui.view" id="view_classsession_graph">
+        <field name="name">classsession.graph</field>
+        <field name="model">eacademy.classsession</field>
+        <field name="arch" type="xml">
+            <graph string="Class Sessions">
+                <field name="start_date" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+
+    <!-- Calendar View for Class Sessions -->
+    <record model="ir.ui.view" id="view_classsession_calendar">
+        <field name="name">classsession.calendar</field>
+        <field name="model">eacademy.classsession</field>
+        <field name="arch" type="xml">
+            <calendar string="Class Sessions" date_start="start_date">
+<!--                <field name="start_date"/>-->
+<!--                <field name="end_date"/>-->
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Search View for Class Sessions -->
+    <record id="view_classsession_search" model="ir.ui.view">
+        <field name="name">classsession.search</field>
+        <field name="model">eacademy.classsession</field>
+        <field name="arch" type="xml">
+            <search string="Class Sessions">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+              <filter name="filter_current" string="Current" domain="[('start_date', '&lt;=', context_today()), ('end_date', '&gt;=', context_today())]"/>
+              <filter name="filter_past" string="Past" domain="[('end_date', '&lt;', context_today())]"/>
+              <filter name="filter_future" string="Future" domain="[('start_date', '&gt;', context_today())]"/>
+
+            </search>
+        </field>
+    </record>
+
+    <!-- Action Definition for Class Sessions -->
+    <record id="action_eacademy_classsession" model="ir.actions.act_window">
+        <field name="name">Class Sessions</field>
+        <field name="res_model">eacademy.classsession</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph,calendar</field>
+        <field name="view_id" ref="classsession_tree_view"/>
+        <field name="search_view_id" ref="view_classsession_search"/>
+    </record>
+
+    <!-- Menu Item for Class Sessions -->
+    <menuitem id="menu_eacademy_classsession" name="Class Sessions" parent="eacademy_menu" action="action_eacademy_classsession"/>
+
+</odoo>
+
+
+
+
+
+
+<!--Note (10-20 line)-->
+
+<!--                     type="object":- for calling custom methods defined in your model. ( when call python (.py) modul ) -->
+<!--                    type="action":- for triggering predefined actions, like printing a report or opening a different view. ( when call .xml file) -->
+<!--                    name=" " :-  name of the method (action_start) that will be called when the button is clicked. (method name)-->
+<!--                    name: %(action_id)d :- The button's name references the report action ID (id="view_eacademy_course_form") using the syntax %(action_id)d. (id namee) -->
+
+
+
+
+
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<odoo>-->
+
+<!--    &lt;!&ndash; Form View &ndash;&gt;-->
+<!--    <record id="view_eacademy_course_form" model="ir.ui.view">-->
+<!--        <field name="name">eacademy.course.form</field>-->
+<!--        <field name="model">eacademy.course</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Course">-->
+<!--                <header>-->
+<!--                    <button string="Start" type="object" name="action_start" class="btn-primary" odoo='{"visible": [["state", "=", "draft"]]}'/>-->
+<!--                    <button string="Complete" type="object" name="action_complete" class="btn-success" odoo='{"visible": [["state", "=", "ongoing"]]}'/>-->
+<!--                    <field name="state" widget="statusbar" statusbar_visible="draft,ongoing,completed"/>-->
+<!--                </header>-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="name_seq" readonly="1"/>-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="age"/>-->
+<!--                            <field name="course"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="start_date"/>-->
+<!--                            <field name="end_date"/>-->
+<!--                            <field name="description"/>-->
+<!--                        </group>-->
+
+<!--                        <notebook>-->
+<!--                            <page string="Lines">-->
+<!--                                <field name="line_ids">-->
+<!--                                    <tree editable="bottom">-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="quantity"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+
+<!--&lt;!&ndash;                        <field name="line_ids" widget='one2many_list'>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tree editable="bottom">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="quantity"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tree>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </field>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <field name="course_id"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <field name="state" widget='statusbar'/>&ndash;&gt;-->
+
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--&lt;!&ndash;                <footer>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button name="action_start" type="object" string="Start" class="oe_highlight" odoo='{"visible": [["state", "=", "draft"]]}'/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button name="action_complete" type="object" string="Complete" odoo='{"visible": [["state", "=", "ongoing"]]}'/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button name="action_draft" type="object" string="Draft"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                </footer>&ndash;&gt;-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Tree View &ndash;&gt;-->
+<!--    <record id="view_eacademy_course_tree" model="ir.ui.view">-->
+<!--        <field name="name">eacademy.course.tree</field>-->
+<!--        <field name="model">eacademy.course</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                 <field name="name_seq" readonly="1"/>-->
+<!--                <field name="name"/>-->
+<!--                <field name="course"/>-->
+<!--                <field name="start_date"/>-->
+<!--                <field name="end_date"/>-->
+<!--                <field name="state"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Kanban View &ndash;&gt;-->
+<!--    <record id="view_eacademy_course_kanban" model="ir.ui.view">-->
+<!--        <field name="name">eacademy.course.kanban</field>-->
+<!--        <field name="model">eacademy.course</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <kanban>-->
+<!--                <field name="name"/>-->
+<!--                <field name="state"/>-->
+<!--                <templates>-->
+<!--                    <t t-name="kanban-box">-->
+<!--                        <div class="oe_kanban_global_click">-->
+<!--                            <div class="o_kanban_image">-->
+<!--                                <field name="name"/>-->
+<!--                            </div>-->
+<!--                            <div class="o_kanban_details">-->
+<!--                                <strong>-->
+<!--                                    <field name="name"/>-->
+<!--                                </strong>-->
+<!--                                <div>-->
+<!--                                    <field name="course"/>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <field name="state"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </templates>-->
+<!--            </kanban>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Graph View &ndash;&gt;-->
+<!--    <record id="view_eacademy_course_graph" model="ir.ui.view">-->
+<!--        <field name="name">eacademy.course.graph</field>-->
+<!--        <field name="model">eacademy.course</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <graph string="Course Graph">-->
+<!--                <field name="start_date" type="date"/>-->
+<!--                <field name="state" type="selection"/>-->
+<!--                <field name="name" type="char"/>-->
+<!--                <field name="age" type="integer"/>-->
+<!--                <field name="course" type="char"/>-->
+<!--            </graph>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Calendar View &ndash;&gt;-->
+<!--    <record id="view_eacademy_course_calendar" model="ir.ui.view">-->
+<!--        <field name="name">eacademy.course.calendar</field>-->
+<!--        <field name="model">eacademy.course</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <calendar string="Course Calendar">-->
+<!--                <field name="start_date" type="date"/>-->
+<!--                <field name="end_date" type="date"/>-->
+<!--                <field name="name" type="char"/>-->
+<!--                <field name="description" type="text"/>-->
+<!--            </calendar>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Define search view &ndash;&gt;-->
+<!--    <record id="view_eacademy_course_search" model="ir.ui.view">-->
+<!--        <field name="name">eacademy.course.search</field>-->
+<!--        <field name="model">eacademy.course</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Courses">-->
+<!--                <field name="name"/>-->
+<!--                <field name="course"/>-->
+<!--                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>-->
+<!--                <filter name="filter_ongoing" string="Ongoing" domain="[('state', '=', 'ongoing')]"/>-->
+<!--                <filter name="filter_completed" string="Completed" domain="[('state', '=', 'completed')]"/>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Action Definition &ndash;&gt;-->
+<!--    <record id="action_eacademy_course" model="ir.actions.act_window">-->
+<!--        <field name="name">Courses</field>-->
+<!--        <field name="res_model">eacademy.course</field>-->
+<!--        <field name="view_mode">tree,form,kanban,graph,calendar</field>-->
+<!--        <field name="view_id" ref="view_eacademy_course_tree"/>-->
+<!--        <field name="search_view_id" ref="view_eacademy_course_search"/>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Menu Item &ndash;&gt;-->
+<!--    <menuitem id="menu_eacademy_root" name="Eacademy"/>-->
+<!--    <menuitem id="menu_eacademy_course" name="Courses" parent="menu_eacademy_root" action="action_eacademy_course"/>-->
+
+
+
+
+<!--           &lt;!&ndash;   Class Sessions    &ndash;&gt;-->
+
+
+
+<!--    &lt;!&ndash; Form View for Class Sessions &ndash;&gt;-->
+<!--    <record model="ir.ui.view" id="classsession_form_view">-->
+<!--        <field name="name">classsession.form</field>-->
+<!--        <field name="model">eacademy.classsession</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Class Session Form">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group string="Class Session">-->
+<!--                            &lt;!&ndash; <field name="name_seq"/> &ndash;&gt;-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="start_date"/>-->
+<!--                            <field name="end_date"/>-->
+<!--                            <field name="currency_id"/>-->
+<!--                            <field name="hour_rate"/>-->
+<!--                            <field name="hours"/>-->
+<!--                            <field name="total_rent"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Tree View for Class Sessions &ndash;&gt;-->
+<!--    <record model="ir.ui.view" id="classsession_tree_view">-->
+<!--        <field name="name">classsession.tree</field>-->
+<!--        <field name="model">eacademy.classsession</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree string="Session Tree">-->
+<!--                &lt;!&ndash; <field name="name_seq"/> &ndash;&gt;-->
+<!--                <field name="name"/>-->
+<!--                <field name="start_date"/>-->
+<!--                <field name="end_date"/>-->
+<!--                <field name="hour_rate"/>-->
+<!--                <field name="hours"/>-->
+<!--                <field name="total_rent"/>-->
+<!--                <field name="currency_id"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Kanban View for Class Sessions &ndash;&gt;-->
+<!--    <record model="ir.ui.view" id="view_classsession_kanban">-->
+<!--        <field name="name">classsession.kanban</field>-->
+<!--        <field name="model">eacademy.classsession</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <kanban string="Class Sessions">-->
+<!--                <templates>-->
+<!--                    <t t-name="kanban-box">-->
+<!--                        <div class="oe_kanban_global_click">-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="start_date"/>-->
+<!--                            <field name="end_date"/>-->
+<!--                            <field name="hour_rate"/>-->
+<!--                            <field name="hours"/>-->
+<!--                            <field name="total_rent"/>-->
+<!--                            <field name="currency_id"/>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </templates>-->
+<!--            </kanban>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Pivot View for Class Sessions &ndash;&gt;-->
+<!--    <record model="ir.ui.view" id="view_classsession_pivot">-->
+<!--        <field name="name">classsession.pivot</field>-->
+<!--        <field name="model">eacademy.classsession</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <pivot string="Class Sessions">-->
+<!--                <field name="name" type="row"/>-->
+<!--                <field name="start_date" type="col"/>-->
+<!--                &lt;!&ndash; <field name="end_date" type="measure"/> &ndash;&gt;-->
+<!--            </pivot>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Graph View for Class Sessions &ndash;&gt;-->
+<!--    <record model="ir.ui.view" id="view_classsession_graph">-->
+<!--        <field name="name">classsession.graph</field>-->
+<!--        <field name="model">eacademy.classsession</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <graph string="Class Sessions">-->
+<!--                <field name="start_date" type="row"/>-->
+<!--                &lt;!&ndash; <field name="end_date" type="measure"/> &ndash;&gt;-->
+<!--            </graph>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Calendar View for Class Sessions &ndash;&gt;-->
+<!--    <record model="ir.ui.view" id="view_classsession_calendar">-->
+<!--        <field name="name">classsession.calendar</field>-->
+<!--        <field name="model">eacademy.classsession</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <calendar string="Class Sessions" date_start="start_date">-->
+<!--                <field name="name"/>-->
+<!--            </calendar>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Action View for Class Sessions &ndash;&gt;-->
+<!--    <record model="ir.actions.act_window" id="classsession_list_action">-->
+<!--        <field name="name">Class Sessions</field>-->
+<!--        <field name="res_model">eacademy.classsession</field>-->
+<!--        <field name="view_mode">tree,form,kanban,pivot,graph,calendar</field>-->
+<!--        <field name="help" type="html">-->
+<!--            <p class="o_view_nocontent_create">Create the first class session</p>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Menu Item for Class Sessions &ndash;&gt;-->
+<!--    <menuitem id="classsession_menu" name="Class Sessions" parent="eacademy_menu" action="classsession_list_action"/>-->
+<!--</odoo>-->

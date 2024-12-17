@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    PDF Report Template -->
+<template id="report_purchase_order_document">
+    <t t-call="web.external_layout">
+        <div class="page">
+            <main>
+                <p>
+                    <h2>
+                        This is PDF Report
+                    </h2>
+                </p>
+            </main>
+        </div>
+    </t>
+</template>
+
+
+    <!-- Report Action -->
+    <record id="action_report_purchase_order" model="ir.actions.report">
+    <field name="name">Purchase Order Report</field>
+    <field name="model">custom.purchase.order</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">custom_purchase_module.report_purchase_order_document</field>
+    <field name="report_file">custom_purchase_module.report_purchase_order_document</field>
+    <field name="binding_model_id" ref="model_custom_purchase_order"/>
+    <field name="binding_type">report</field>
+</record>
+
+<!--    Menu -->
+    <menuitem id="menu_custom_customers_pdf" name="PDF Report" parent="menu_custom_reporting" sequence="43" action="action_report_purchase_order"/>
+</odoo>
+
+

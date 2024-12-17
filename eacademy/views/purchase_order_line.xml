@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--    Add field in Purchase order line (Pro_no, Product_details, Product_price) in Products  -->
+        <record id="purchase_order_line" model="ir.ui.view">
+            <field name="name">purchase.order.line</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="pro_no"/>
+                </xpath>
+                <xpath expr="//field[@name='price_unit']" position="before">
+                    <field name="product_details"/>
+                </xpath>
+                  <xpath expr="//field[@name='price_unit']" position="after">
+                    <field name="product_price"/>
+                </xpath>
+
+            </field>
+        </record>
+
+<!--    Add field in Invoice order line (account.move.invoice.line) (Pro_no, Product_details, Product_price) in Invoice Lines  -->
+        <record model="ir.ui.view" id="account_move_invoice_line_customization_id">
+            <field name="name">Account Move Invoice Line Customization</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                 <xpath expr="//tree//field[@name='product_id']" position="before">
+                    <field name="pro_no"/>
+                </xpath>
+                <xpath expr="//tree//field[@name='price_unit']" position="before">
+                    <field name="product_details"/>
+                </xpath>
+                  <xpath expr="//tree//field[@name='price_unit']" position="after">
+                    <field name="product_price"/>
+                </xpath>
+
+            </field>
+
+        </record>
+    </data>
+</odoo>
+
+
+<!-- Note -->
+<!-- 1) I try to Create Bill in Purchase order But, not create ?? -->

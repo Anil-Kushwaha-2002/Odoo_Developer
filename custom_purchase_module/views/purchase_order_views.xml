@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+       <!-- Form View for Purchase Order -->
+        <record id="view_purchase_order_form" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">custom.purchase.order</field>
+            <field name="arch" type="xml">
+                <form string="Custom Purchase Order">
+                    <sheet>
+
+                        <header>
+                            <button name="action_print_rfq" type="object" string="Print RFQ" class="oe_highlight"/>
+                            <button name="action_confirm_order" type="object" string="Confirm Order" groups="base.group_user" class="btn-primary"/>
+                            <button name="action_send_email" type="object" string="Send Email" class="oe_highlight"/>
+                            <button name="action_cancel_order" type="object" string="Cancel" groups="base.group_user" class="oe_highlight"/>
+                        </header>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="partner_id"/>order.line
+                                <field name="currency_id"/>
+                            </group>
+                            <group>
+                                 <field name="date_order"/>
+                                 <field name="date_arrival"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <!-- 1st Page for Order Lines -->
+                            <page string="Products Order " name ='products_order'>
+                                <field name="order_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="name"/>
+                                        <field name="product_qty"/>
+                                        <field name="price_unit"/>
+                                        <field name="price_subtotal" readonly="1"/>
+                                        <field name="price_tax" readonly="1"/>
+                                        <field name="price_total" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <!-- 2nd Page for Additional Information -->
+                            <page string="Additional Info" name="additional_info">
+                                <group>
+                                    <field name="company_id"/>
+                                    <field name="source_document"/>
+                                    <field name="payment_terms_id"/>
+                                    <field name="fiscal_position_id"/>
+                                </group>
+                            </page>
+
+                             <!-- 3nd Page for Additional Information -->
+                            <page string="Additional Info">
+                                <field name="order_line_ids">
+                                    <form string="Custom Purchase Order">
+                                        <field name="company_id"/>
+                                        <field name="source_document"/>
+                                        <field name="payment_terms_id"/>
+                                        <field name="fiscal_position_id"/>
+                                    </form>
+                                 </field>
+                            </page>
+                        </notebook>
+
+                        <group>
+                            <field name="amount_untaxed" readonly="1"/>
+                            <field name="amount_tax" readonly="1"/>
+                            <field name="amount_total" readonly="1"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+    <!-- Tree View -->
+    <record id="view_purchase_order_tree" model="ir.ui.view">
+        <field name="name">custom.purchase.order.tree</field>
+        <field name="model">custom.purchase.order</field>
+        <field name="arch" type="xml">
+            <tree string="Purchase Orders">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="amount_total"/>
+                <field name="date_order"/>
+                <field name="date_arrival"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_purchase_order_kanban" model="ir.ui.view">
+        <field name="name">custom.purchase.order.kanban</field>
+        <field name="model">custom.purchase.order</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card">
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>Vendor: <field name="partner_id"/></div>
+                                <div>Order Date: <field name="date_order"/></div>
+                                <div>Total: <field name="amount_total"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+    <!--   Action   -->
+    <record id="action_custom_purchase_orders" model="ir.actions.act_window">
+        <field name="name">Purchase Orders</field>
+        <field name="res_model">custom.purchase.order</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_id" ref="view_purchase_order_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first purchase order
+            </p>
+        </field>
+    </record>
+
+
+    <record id="action_request_for_quotation" model="ir.actions.act_window">
+    <field name="name">Request for Quotation</field>
+    <field name="res_model">custom.purchase.order</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_purchase_order_tree"/>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Create your first request for quotation
+        </p>
+    </field>
+</record>
+
+<!-- Repeat similar action definitions for action_orders, action_vendors, action_products, action_reporting, action_configuration -->
+
+<!-- Confirm Orders Action  -->
+    <record id="action_orders" model="ir.actions.act_window">
+    <field name="name">Orders</field>
+    <field name="res_model">custom.purchase.order</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_purchase_order_tree"/>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+</record>
+
+<!--  Vendors Action  -->
+   <record id="action_vendors" model="ir.actions.act_window">
+    <field name="name">Vendors</field>
+    <field name="res_model">custom.purchase.order</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_purchase_order_tree"/>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Create your first request for quotation
+        </p>
+    </field>
+</record>
+
+
+
+<!--  Menu Items -->
+<!--    <menuitem id="menu_custom_purchase_root" name="Custom Purchase" sequence="10"/>-->
+<!--    <menuitem id="menu_custom_purchase_orders" name="Purchase Orders" parent="menu_custom_purchase_root" action="action_custom_purchase_orders" sequence="20"/>-->
+
+
+    <!-- Main Menu -->
+    <menuitem id="menu_custom_purchase_root" name="Custom Purchase" sequence="10"/>
+
+    <!-- Purchase Orders and its Submenus -->
+    <menuitem id="menu_custom_purchase_orders" name="Purchase Orders" parent="menu_custom_purchase_root" sequence="20" action="action_custom_purchase_orders"/>
+
+    <menuitem id="menu_custom_request_for_quotation" name="Request for Quotation" parent="menu_custom_purchase_orders" sequence="21" action="action_request_for_quotation"/>
+    <menuitem id="menu_custom_orders" name="Orders" parent="menu_custom_purchase_orders" sequence="22" action="action_orders"/>
+    <menuitem id="menu_custom_vendors" name="Vendors" parent="menu_custom_purchase_orders" sequence="23" action="action_vendors"/>
+
+
+    <!-- Products Menu -->
+    <menuitem id="menu_custom_products" name="Products" parent="menu_custom_purchase_root" sequence="30" action="action_request_for_quotation"/>
+
+    <menuitem id="menu_custom_product" name="Products" parent="menu_custom_products" sequence="31" action="action_request_for_quotation"/>
+
+
+    <!-- Reporting Menu -->
+    <menuitem id="menu_custom_reporting" name="Reporting" parent="menu_custom_purchase_root" sequence="40" action="action_request_for_quotation"/>
+
+    <menuitem id="menu_custom_purchase" name="Purchase" parent="menu_custom_reporting" sequence="41" action="action_request_for_quotation"/>
+    <menuitem id="menu_custom_customers" name="Customers" parent="menu_custom_reporting" sequence="42" action="action_request_for_quotation"/>
+
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_custom_configuration" name="Configuration" parent="menu_custom_purchase_root" sequence="50" action="action_request_for_quotation"/>
+
+    <menuitem id="menu_custom_settings" name="Settings" parent="menu_custom_configuration" sequence="51" action="action_request_for_quotation"/>
+    <menuitem id="menu_custom_vendor_pricelists" name="Vendor Pricelists" parent="menu_custom_configuration" sequence="52" action="action_request_for_quotation"/>
+    <menuitem id="menu_custom_product_categories" name="Product Categories" parent="menu_custom_configuration" sequence="53" action="action_request_for_quotation"/>
+
+
+</odoo>

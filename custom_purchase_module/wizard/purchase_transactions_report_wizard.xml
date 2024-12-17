@@ -1,0 +1,73 @@
+<odoo>
+<!--   Excel  Report Generation -->
+ <record id="view_custom_purchase_order_wizard_excel_report_form" model="ir.ui.view">
+    <field name="name">custom.purchase.order.wizard.form</field>
+    <field name="model">custom.purchase.order.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Purchase Order Transactions Wizard">
+            <group>
+                <field name="name"/>
+                <field name="order_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="category_id"/>
+            </group>
+            <footer>
+                <button string="Generate Excel Report" type="object" name="action_po_transactions" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+
+<!--    Action Wizard -->
+    <record id="action_custom_purchase_order_wizard" model="ir.actions.act_window">
+    <field name="name">Purchase Order Wizard</field>
+    <field name="res_model">custom.purchase.order.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_custom_purchase_order_wizard_excel_report_form"/>
+    <field name="target">new</field>
+</record>
+
+<!--    Menu item -->
+    <menuitem id="menu_custom_wizard" name="Excel Report" parent="menu_custom_reporting" sequence="43" action="action_custom_purchase_order_wizard"/>
+
+
+
+
+<!--&lt;!&ndash;  Wizard &ndash;&gt;-->
+<!--    <record id="view_custom_purchase_order_wizard_form" model="ir.ui.view">-->
+<!--        <field name="name">custom.purchase.order.wizard.form</field>-->
+<!--        <field name="model">custom.purchase.order.wizard</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Confirm Purchase Order">-->
+<!--                <group>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="confirm_date"/>-->
+<!--&lt;!&ndash;                    <field name="order_id" readonly="1"/>&ndash;&gt;-->
+<!--                </group>-->
+<!--                <footer>-->
+<!--                    <button string="Confirm" type="object" name="action_confirm_order" class="btn-primary"/>-->
+<!--                    <button string="Cancel" class="btn-secondary" special="cancel"/>-->
+<!--                </footer>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+<!--&lt;!&ndash;    Action Wizard &ndash;&gt;-->
+<!--    <record id="action_custom_purchase_order_wizard" model="ir.actions.act_window">-->
+<!--    <field name="name">Purchase Order Wizard</field>-->
+<!--    <field name="res_model">custom.purchase.order.wizard</field>-->
+<!--    <field name="view_mode">form</field>-->
+<!--    <field name="view_id" ref="view_custom_purchase_order_wizard_form"/>-->
+<!--    <field name="target">new</field>-->
+<!--</record>-->
+
+<!--&lt;!&ndash;    Menu item &ndash;&gt;-->
+<!--    <menuitem id="menu_custom_wizard" name="Wizard" parent="menu_custom_reporting" sequence="44" action="action_custom_purchase_order_wizard"/>-->
+
+
+
+</odoo>
