@@ -7,7 +7,7 @@
         This module customizes the Sales Order PDF report by adding a UOM column 
         and Invoicing/Shipping address details.
     """,
-    'author': 'Aleeza Anjum',
+    'author': 'Anil Kushwaha',
     'website': 'https://www.example.com',
     'depends': ['sale'],
     'data': [
