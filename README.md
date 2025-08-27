@@ -127,17 +127,17 @@ Purpose: Manage leads, opportunities, and Collect customer interactions.
 - Workflow:
 ```
 1. Lead Generation: Leads can come from website, email, phone calls, or manually entered.
-Odoo Action: Go to CRM → Leads → Create.
+   Odoo Action: Go to CRM → Leads → Create.
 2. Lead Qualification: Check company info, contact details, interest; Assign salesperson; qualify lead to opportunity.
-Odoo Action: Click Mark as Qualified → Lead becomes an Opportunity.
+   Odoo Action: Click Mark as Qualified → Lead becomes an Opportunity.
 3. Opportunity Management: Track stages (New, Qualified, Proposal, Won/Lost).
-Odoo Action: Open an opportunity → Add Activities → Move through stages in Kanban view.
+   Odoo Action: Open an opportunity → Add Activities → Move through stages in Kanban view.
 4. Communication & Follow-ups: Schedule meetings, calls, emails, Log notes about every interaction.
-Odoo Actions: to remind team members of follow-ups.
+   Odoo Actions: to remind team members of follow-ups.
 5. Quotation & Negotiation: Qualified opportunity can be converted into a Sales Order in Sales module.
-Odoo Action: Click Create Quotation from opportunity → Send to customer → Wait for confirmation.
+   Odoo Action: Click Create Quotation from opportunity → Send to customer → Wait for confirmation.
 6. Closing the Deal: Finalize sale and move opportunity to completion; Won:- Opportunity converted into Sales Order → Invoice → Delivery; Lost:- Reason documented for reporting and analysis.
-Odoo Action: Click Mark as Won or Mark as Lost.
+   Odoo Action: Click Mark as Won or Mark as Lost.
 7. Reporting & Analytics: Monitor sales performance and pipeline health.
 ```
 - Integration: 
