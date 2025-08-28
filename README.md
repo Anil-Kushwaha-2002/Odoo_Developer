@@ -79,36 +79,10 @@ my_module/
 - tests/ → For module testing using Odoo test framework.
 
 # 2. Odoo architecture MVC (Model-View-Controller)
-### Models (M) (Business Logic)
-- Represents business logic and database structure.
-- Defined in Python classes. Extend models.Model.
-- Define fields, methods, constraints.
-### Workflow:
-- ORM maps the class to a database table.
-- CRUD operations (Create, Read, Update, Delete) can be performed via models.
-- Methods handle business logic and automated actions.
+- **Model:-** Business logic & DB (Python)
+- **View:-** UI (XML)
+- **Controller:-** Handles requests, routes (Python)
 
-### Views (V) (User Interface)
-- Represents business logic and database structure.
-- Defined in XML files inside the views/ folder. Linked to models.
-- **Types of views:-** Form (data entry),  Tree (list view), Kanban (card view), Search (filters)
-### Workflow:
-- User interacts with the form/list → sends requests to Controller → Model updates DB.
-- Users interact with data through the UI.
-- UI (XML) sends requests to ORM to fetch or update data.
-- ORM updates the database automatically.
-
-### Controller (C)
-- Connects View and Model; Handles requests, routes (Python)
-- Standard ORM Controllers → Automatic handling for forms, lists.
-- Custom Web Controllers → For website, APIs, or custom endpoints.
-
-### MVC Workflow in Odoo
-```
-User Action → View (XML) → Controller (Python) → Model (ORM) → Database
-                             ↑                            ↓
-                          Response <--- Updated Data <--- Database
-```
 ### Summary Table
 
 | MVC Component  | Odoo Implementation          | Files Location |
@@ -117,6 +91,12 @@ User Action → View (XML) → Controller (Python) → Model (ORM) → Database
 | View (V)       | XML Files (Forms, Lists, UI) | views/         |
 | Controller (C) | Python Methods / Web Routes  | controllers/   |
 
+### MVC Workflow in Odoo
+```
+User Action → View (XML) → Controller (Python) → Model (ORM) → Database
+                             ↑                            ↓
+                          Response <--- Updated Data <--- Database
+```
 ---
 ---
 # 3. Workflow of core Odoo modules
@@ -291,15 +271,10 @@ Pay Vendor (Accounting)
 | Accounting | Sales, Purchase       | Invoice / Payment reconciliation               |
 ---
 ---
+
 # Basic Odoo Questions
 ```base
-Q1. Explain Odoo’s architecture. ?
-Odoo follows MVC architecture:
-Model: Business logic & DB (Python)
-View: UI (XML)
-Controller: Handles requests, routes (Python)
-
-Q2. How to create a new Odoo module ?
+Q1. How to create a new Odoo module ?
 1. Create folder structure (__init__.py, __manifest__.py, models, views).
 2. Define models in Python.
 3. Define views in XML.
@@ -356,16 +331,10 @@ Q12. How to improve performance in Odoo  ?
 
 Q13. How to debug in Odoo ?
 Use pdb, print(), logger, or --dev=all mode.
-```
+
 
 # API & Controllers
-Call a third-party REST API to fetch data (e.g., weather, payment gateway, shipping info) and store it in Odoo.
-### Odoo Integration Flow
-```base
-Model (Python method) → requests library → Third-party API → Process response → Save in Odoo
-```
-```base
-Q12. How to create REST APIs in Odoo?
+Q14. How to create REST APIs in Odoo?
 A: Use  @http.route() in controllers to expose endpoints.
   @http.route('/get/employees', type='json', auth='user')
   def get_employees(self):
@@ -373,12 +342,13 @@ A: Use  @http.route() in controllers to expose endpoints.
       return employees.read(['name','department_id'])
 
 
-Q13. How to call Odoo API externally / API integration ?
+Q15. How to call Odoo API externally / API integration ?
 A: APIs for external integration. JSON-RPC uses JSON, XML-RPC uses XML format.
 
 Q16. How to integrate Odoo with third-party APIs?
 A: Use Python requests or Odoo http library; process data in controllers/models.
 ```
+
 ---
 ---
 # Odoo Razorpay Payment Integration
@@ -416,10 +386,15 @@ Razorpay will send a payment success/failure callback to your endpoint.
 - Verify signature using Razorpay SDK.
 - Mark invoice as paid on success.
 ```
+### Odoo Integration Flow
+```base
+Model (Python method) → requests library → Third-party API → Process response → Save in Odoo
+```
+
 ---
 ---
 # Frequently Asked Questions on Odoo API Integration
-Third-party API integrations, including payments, REST APIs
+Call a third-party REST API to fetch data (e.g., weather, payment gateway, shipping info) and store it in Odoo.
 ## 1. Basics
 
 **Q1. What is third-party API integration in Odoo?**  
