@@ -1,7 +1,7 @@
 # Odoo_Developer, Oakland Odoo ( OdooERP.ae )
  
 # Working flow of an Odoo module
-### 1. Module Structure
+# 1. Module Structure
 ```
 my_module/
 │
@@ -78,7 +78,7 @@ my_module/
 - i18n/ → For multilingual support.
 - tests/ → For module testing using Odoo test framework.
 
-# 2. MVC (Model-View-Controller)
+# 2. Odoo architecture MVC (Model-View-Controller)
 ### Models (M) (Business Logic)
 - Represents business logic and database structure.
 - Defined in Python classes. Extend models.Model.
@@ -95,11 +95,11 @@ my_module/
 ### Workflow:
 - User interacts with the form/list → sends requests to Controller → Model updates DB.
 - Users interact with data through the UI.
-- UI sends requests to ORM to fetch or update data.
+- UI (XML) sends requests to ORM to fetch or update data.
 - ORM updates the database automatically.
 
 ### Controller (C)
-- Connects View and Model.
+- Connects View and Model; Handles requests, routes (Python)
 - Standard ORM Controllers → Automatic handling for forms, lists.
 - Custom Web Controllers → For website, APIs, or custom endpoints.
 
@@ -289,4 +289,207 @@ Pay Vendor (Accounting)
 | Inventory  | Sales, Purchase       | Stock movements, Reorder rules                 |
 | Purchase   | Inventory, Accounting | Purchase Order → Goods Receipt → Vendor Bill   |
 | Accounting | Sales, Purchase       | Invoice / Payment reconciliation               |
+---
+---
+# Basic Odoo Questions
+```base
+Q1. Explain Odoo’s architecture. ?
+Odoo follows MVC architecture:
+Model: Business logic & DB (Python)
+View: UI (XML)
+Controller: Handles requests, routes (Python)
 
+Q2. How to create a new Odoo module ?
+1. Create folder structure (__init__.py, __manifest__.py, models, views).
+2. Define models in Python.
+3. Define views in XML.
+4. Add security rules.
+5. Install module via Apps.
+
+
+# Models & ORM
+Q3. Common Odoo ORM methods ?
+A: create(), search(), write(), unlink(), browse(), read()
+
+Q4. How to create One2many and Many2one relations?
+department_id = fields.Many2one('hr.department')
+employee_ids = fields.One2many('hr.employee', 'department_id')
+
+Q5. Difference between search() and browse() ?
+search() → Returns recordset IDs based on conditions.
+browse() → Access records by IDs.
+
+
+# Views & UI
+Q6. How to add a field in a form view?
+A: Add <field name="field_name"/> in XML view file.
+
+Q7. Types of inheritance in Odoo?
+1. Model: _inherit = 'model.name'
+2. Classical: _name with _inherit
+3. View : Using <xpath> in XML.
+
+Q8. How to hide a field dynamically?
+A: Use attrs in XML:
+<field name="salary" attrs="{'invisible':[('is_manager','=',False)]}"/>
+
+
+# Security & Access
+Q9. How to restrict user access ?
+A: Using ir.model.access.csv for CRUD rights and record rules for record-level security.
+
+Q10. Difference between Groups and Access Control ?
+Groups: Define user roles.
+Access Control: CRUD permissions per model.
+
+
+# Miscellaneous
+Q11. What are Transient and Abstract models ?
+TransientModel: Temporary data, auto-deleted (e.g., wizards).
+AbstractModel: For reusable logic; not linked to DB tables.
+
+Q12. How to improve performance in Odoo  ?
+1. Use sudo() carefully.
+2. Limit search() results with limit.
+3. Use computed & stored fields properly.
+4. Enable caching for static data.
+
+Q13. How to debug in Odoo ?
+Use pdb, print(), logger, or --dev=all mode.
+```
+
+# API & Controllers
+Call a third-party REST API to fetch data (e.g., weather, payment gateway, shipping info) and store it in Odoo.
+### Odoo Integration Flow
+```base
+Model (Python method) → requests library → Third-party API → Process response → Save in Odoo
+```
+```base
+Q12. How to create REST APIs in Odoo?
+A: Use  @http.route() in controllers to expose endpoints.
+  @http.route('/get/employees', type='json', auth='user')
+  def get_employees(self):
+      employees = request.env['hr.employee'].search([])
+      return employees.read(['name','department_id'])
+
+
+Q13. How to call Odoo API externally / API integration ?
+A: APIs for external integration. JSON-RPC uses JSON, XML-RPC uses XML format.
+
+Q16. How to integrate Odoo with third-party APIs?
+A: Use Python requests or Odoo http library; process data in controllers/models.
+```
+---
+---
+# Odoo Razorpay Payment Integration
+### 1. Prerequisites
+```
+1. Odoo Installed (v14+ recommended).
+2. Razorpay Account → https://razorpay.com
+  → Get Key ID & Key Secret from Dashboard → Settings → API Keys.
+3. Python Library:- `pip install razorpay`
+4. Create a Custom Odoo Module → We'll add Razorpay integration code inside. Like ( razorpay_integration/)
+```
+### 2. Overall Flow in Odoo
+```
+Odoo Sales Order → User Clicks "Pay Now" → Razorpay Checkout → Payment Success/Failure → Odoo Updates Invoice & Payment Status
+```
+### 3. Integration Steps
+```
+Step 1:- Store Razorpay Keys in Odoo
+- Go to Settings → Technical → System Parameters
+- Add:
+-  razorpay_key_id 
+-  razorpay_key_secret
+We will fetch them from the backend using ir.config_parameter.
+
+Step 2:- Add Payment Button on Sales Order, Backend Logic and Checkout Page
+Payment Button:- views/sale_order_view.xml
+Backend Logic:- models/sale_order.py
+Controller:- controllers/main.py
+
+Add a new field for storing Razorpay order id:
+razorpay_order_id = fields.Char(string="Razorpay Order ID")
+
+Step 3:- Create Payment Success Callback
+Razorpay will send a payment success/failure callback to your endpoint.
+- Verify signature using Razorpay SDK.
+- Mark invoice as paid on success.
+```
+---
+---
+# Frequently Asked Questions on Odoo API Integration
+Third-party API integrations, including payments, REST APIs
+## 1. Basics
+
+**Q1. What is third-party API integration in Odoo?**  
+**A:** Connecting Odoo to external services (payments, shipping, SMS, ERP, etc.) using REST, JSON-RPC, or XML-RPC.
+
+**Q2. Which Python library is used for API calls?**  
+**A:** `requests` (most common), `json` for parsing responses, `razorpay` for payment integration.
+
+---
+
+## 2. Payment Gateway
+**Q3. How to integrate Razorpay/PayPal/Stripe?**  
+**A:**  
+1. Get API keys from provider.  
+2. Store keys in Odoo System Parameters.  
+3. Add **“Pay Now”** button on sales/invoice.  
+4. Use model method + requests or SDK to create payment order.  
+5. Use controller for checkout & callback.  
+6. Verify payment & update invoice status.
+
+**Q4. How to handle payment success/failure?**  
+**A:** Use webhooks or controller callback; verify signature; update invoice/payment record accordingly.
+
+---
+
+## 3. REST API Integration
+
+**Q5. How to expose Odoo data to external apps?**  
+**A:** Use `@http.route()` with `type='json'` or `type='http'` in a controller.
+
+**Q6. How to consume external APIs in Odoo?**  
+**A:** Use Python `requests.get()` / `requests.post()` in model or controller; parse JSON/XML response; store in Odoo.
+
+**Q7. Difference between JSON-RPC and REST API?**  
+**A:** JSON-RPC is Odoo-native for ORM calls; REST is standard HTTP API for external apps.
+
+---
+
+## 4. Real-Time / Practical Scenarios
+
+**Q8. How to integrate SMS or email gateway?**  
+**A:** Use `requests.post()` to send payload to provider; save status in Odoo model for logging.
+
+**Q9. How to sync products/customers with external ERP?**  
+**A:**  
+1. Schedule cron jobs to fetch/update data periodically.  
+2. Use API endpoints with authentication.  
+3. Map external fields to Odoo fields.
+
+**Q10. How to ensure secure API integration?**  
+**A:**  
+1. Use API keys or OAuth.  
+2. HTTPS requests only.  
+3. Verify signatures/webhooks.  
+4. Store sensitive data in System Parameters, not code.
+
+---
+
+## 5. Troubleshooting / Best Practices
+
+**Q11. How to debug API integration issues?**  
+**A:**  
+1. Log request/response using `_logger.info`.  
+2. Check HTTP status codes.  
+3. Test in provider’s sandbox mode.
+
+**Q12. How to improve performance?**  
+**A:**  
+1. Use `sudo()` carefully.  
+2. Limit search results.  
+3. Avoid unnecessary API calls; batch updates if possible.
+
+---
