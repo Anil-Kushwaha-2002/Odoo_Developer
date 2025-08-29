@@ -261,7 +261,7 @@ Receive Goods (Inventory)
    ↓
 Pay Vendor (Accounting)
 ```
-# Interconnections Summary
+# 4. Interconnections Summary
 | Module     | Interacts With        | Trigger / Dependency                           |
 | ---------- | --------------------- | ---------------------------------------------- |
 | CRM        | Sales                 | Opportunity → Sales Order                      |
@@ -272,7 +272,7 @@ Pay Vendor (Accounting)
 ---
 ---
 
-# Basic Odoo Questions
+# 5. Basic Odoo Questions
 ```base
 Q1. How to create a new Odoo module ?
 1. Create folder structure (__init__.py, __manifest__.py, models, views).
@@ -351,7 +351,7 @@ A: Use Python requests or Odoo http library; process data in controllers/models.
 
 ---
 ---
-# Odoo Razorpay Payment Integration
+# 6. Odoo Razorpay Payment Integration
 ### 1. Prerequisites
 ```
 1. Odoo Installed (v14+ recommended).
@@ -393,7 +393,7 @@ Model (Python method) → requests library → Third-party API → Process respo
 
 ---
 ---
-# Frequently Asked Questions on Odoo API Integration
+# 7. Frequently Asked Questions on Odoo API Integration
 Call a third-party REST API to fetch data (e.g., weather, payment gateway, shipping info) and store it in Odoo.
 ## 1. Basics
 
